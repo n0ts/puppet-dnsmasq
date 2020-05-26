@@ -52,16 +52,14 @@ describe 'dnsmasq' do
       :require => 'File[/etc/resolver]',
     })
 
-    should contain_homebrew__formula('dnsmasq')
-
-    should contain_package('boxen/brews/dnsmasq').with({
-      :ensure => '2.76-boxen3',
+    should contain_package('dnsmasq').with({
+      :ensure => 'latest',
       :notify => "Service[#{service_name}]",
     })
 
     should contain_service(service_name).with({
       :ensure  => 'running',
-      :require => 'Package[boxen/brews/dnsmasq]',
+      :require => 'Package[dnsmasq]',
     })
   end
 
