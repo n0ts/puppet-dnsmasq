@@ -51,18 +51,14 @@ class dnsmasq(
     notify  => Service[$service],
   }
 
-  homebrew::formula { 'dnsmasq':
-    before => Package['boxen/brews/dnsmasq'],
-  }
-
-  package { 'boxen/brews/dnsmasq':
-    ensure => '2.76-boxen3',
+  package { 'dnsmasq':
+    ensure => latest,
     notify => Service[$service],
   }
 
   service { $service:
     ensure  => running,
-    require => Package['boxen/brews/dnsmasq'],
+    require => Package['dnsmasq'],
   }
 
   service { 'com.boxen.dnsmasq': # replaced by dev.dnsmasq
